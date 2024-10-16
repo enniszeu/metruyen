@@ -19,12 +19,10 @@ import styles from './book.module.css';
 export default async function ChapPage({ params }: { params: { id: string; chapId: string } }) {
   const { id, chapId } = params;
 
-  // Gọi API để lấy dữ liệu
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chapter?url=${process.env.NEXT_PUBLIC_API_URL_IO}/${id}/${chapId}/`, { cache: 'no-store' });
 
-  // Kiểm tra phản hồi từ API
   if (!res.ok) {
-    return <div>Không thể tải dữ liệu.</div>; // Thông báo lỗi
+    return <div>Không thể tải dữ liệu.</div>; 
   }
 
   const data: ApiResponse = await res.json(); // Đọc dữ liệu JSON và gán kiểu

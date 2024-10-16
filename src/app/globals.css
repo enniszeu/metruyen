@@ -1,5 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+html{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #545454;
+}
 body{
-    background-color:#f2dfce;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
 }
 
 h1 h2 h3 h4 p span li a {
@@ -20,7 +33,6 @@ h1 h2 h3 h4 p span li a {
     width:42.5%;
     background:#f8eadd;
     border-radius:20px;
-    boxShadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     padding:20px 30px;
 flex-grow:1;
 margin:20px 10px;

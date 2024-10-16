@@ -1,5 +1,6 @@
+
 .main{
-  width:95%;
+  width:80%;
   margin:auto;
 }
 
@@ -29,4 +30,11 @@
 
 .title{
   padding-left:40px;
+}
+
+@media screen and (max-width: 768px) {
+  .main{
+    width:95%;
+    margin:auto;
+  }
 }

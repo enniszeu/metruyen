@@ -1,0 +1,56 @@
+.bookList {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.bookGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.bookItem {
+    text-align: center;
+    border: 1px solid #eee;
+    padding: 10px;
+    border-radius: 8px;
+    position: relative; /* Make the bookItem container relative for absolute positioning inside */
+}
+
+.bookItem img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.rating {
+    color: gold;
+}
+
+.price {
+    font-size: 1.2em;
+    color: #e63946;
+    margin-top: 10px;
+}
+
+.bookInfo {
+    background-color: #00000080;
+    border-radius: 0 0 10px 10px;
+    bottom: 0;
+    color: #fff;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    display: flex;
+    flex: 1 1;
+    height: 100%;
+    padding: 10px;
+}
+
+@media screen and (max-width: 600px) {
+    .bookGrid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 20px;
+    }
+}

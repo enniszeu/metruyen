@@ -1,0 +1,44 @@
+/* components/Carousel.module.css */
+.carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 90%; /* Tăng chiều rộng lên 90% */
+    margin: auto;
+    overflow: hidden;
+  }
+  
+  .slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: opacity 0.5s ease-in-out; /* Hiệu ứng mượt mà khi chuyển slide */
+  }
+  
+  .image {
+    width: 100%; /* Hoặc bạn có thể đặt chiều rộng cố định, ví dụ: 80% */
+    border-radius: 10px;
+  }
+  
+  .arrow {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    user-select: none;
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1; /* Đảm bảo nút không bị ẩn dưới các phần tử khác */
+  }
+  
+  .arrow:first-of-type {
+    left: 10px;
+  }
+  
+  .arrow:last-of-type {
+    right: 10px;
+  }
+  

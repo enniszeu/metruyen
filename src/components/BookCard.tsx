@@ -1,47 +1,46 @@
+// components/BookList.tsx
+'use client';
+import React from 'react';
+import styles from './BookCard.module.css';
 
-export default function BookCard({title,description,coverImage,onClick}:any) {
-  return (
-   <div style={cardStyle} onClick={onClick}>
-    <img src={coverImage} alt={title} style={imageStyle}/>
-    <div style={contentStyle}>
-    <h3 style={titleStyle}>{title}</h3>
-    <p style={descriptionStyle}>{description}</p>
-    </div>
-   </div>
-  )
+// Define the shape of the book object using TypeScript interfaces
+interface Book {
+    title: string;
+    author: string;
+    type: string;
+    chapter: string;
 }
 
+// Define the props for the BookList component
+interface BookListProps {
+    books: Book[];
+}
 
-const cardStyle = {
-    width: '200px',
-    padding: '1rem',
-    borderRadius: '5px',
-    backgroundColor: '#f8eadd',
-    boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
-    cursor: 'pointer',
-    transition: 'transform 0.3s ease',
-    marginBottom: '1.5rem',
-    marginRight: '1.6rem',
-  };
-  
-  const imageStyle = {
-    width: '100%',
-    aspectRatio:1,
-    borderRadius: '5px',
-  };
-  
-  const contentStyle = {
-    marginTop: '1rem',
-  };
-  
-  const titleStyle = {
-    fontSize: '1.2rem',
-    marginBottom: '0.5rem',
-    color:'#000'
-  };
-  
-  const descriptionStyle = {
-    fontSize: '0.8rem',
-    color: '#888',
-  };
-  
+const BookList: React.FC<BookListProps> = ({ books }) => {
+    return (
+        <div className={styles.bookList}>
+            <h2>Our Favourite Reads</h2>
+            <div className={styles.bookGrid}>
+                {books.map((book, index) => (
+                    <div className={styles.bookItem} key={index}>
+                      <div>
+                          <img
+                              src="https://pic.arkread.com/cover/column/f/65267799.1725851136.jpg!cover_default.jpg"
+                              alt={book.title}
+                          />
+                          <div className={styles.bookInfo}>
+                          <h3>{book.title}</h3>
+                          <p>by {book.author}</p>
+                          <p>Type: {book.type}</p>
+                          <p className={styles.price}>{book.chapter}</p>
+                        </div>
+                        </div>
+                        
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+export default BookList;

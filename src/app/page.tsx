@@ -1,6 +1,13 @@
+
 import BookCard from '@/components/BookCard'
 import Header from '@/components/Header'
 import styles from './page.module.css'
+import Carousel from '@/components/Carousel'; 
+import MenuBar from '@/components/MenuBar';
+import BookList from '@/components/BookCard';
+import Slide from '@/components/Slide';
+
+import './globals.css'
 
 
 interface Book {
@@ -14,6 +21,7 @@ interface Book {
 export default async function Home() {
   // Gọi API trực tiếp trong Server Component
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stories`, { cache: 'no-store' }) 
+
   const books = await res.json()
 
   function removeVietnameseTones(str: string) {
@@ -26,30 +34,18 @@ export default async function Home() {
   }
   
   return (
-    <main className={styles.main}>
-      <div>
-        <Header />
-        <div className={styles.containerStyle}>
-          <div className={styles.grouper}>
-            <h1 className={styles.title}>ALL BOOKS</h1>
-            <ul className={styles.ulGroupStyle}>
-              {
-                books.stories.map((book: Book, i: number) => (
-                  <li key={i} className={styles.liGroupStyle}>
-                    <a href={`/truyen/${removeVietnameseTones(book.title)}`} style={{ textDecoration: 'none' }}>
-                      <BookCard 
-                        title={book.title} 
-                        coverImage={book.image} 
-                        description={book.description} 
-                      />
-                    </a>
-                  </li>
-                ))
-              }
-            </ul>
+    <div>
+      <MenuBar />
+      <Carousel />
+      <main className={styles.main}>
+        <div>
+          <div>
+              <Slide books={books.stories} title='Truyện đề cử'/>
+              <Slide books={books.stories} title='Truyện new'/>
+              <Slide books={books.stories} title='Truyện hot'/>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   )
 }

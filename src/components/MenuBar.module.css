@@ -1,0 +1,37 @@
+/* components/MenuBar.module.css */
+.menuBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+  
+  .logo {
+    margin-right: auto; /* Để logo nằm bên trái menu */
+  }
+  
+  .logoImage {
+    height: 50px; /* Điều chỉnh chiều cao của logo */
+    width: auto; /* Để chiều rộng tự động theo tỷ lệ */
+  }
+  
+  .menuBar ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .menuBar a {
+    text-decoration: none;
+  }
+  
+  .menuBar a:hover {
+    text-decoration: underline;
+  }
+  @media screen and (max-width: 768px) {
+    .menuBar ul {
+      display: none;
+    }
+  }
