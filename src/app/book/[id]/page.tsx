@@ -1,7 +1,6 @@
 "use client"
 import { books } from "@/constants/mockData"
 import '@fortawesome/fontawesome-free/css/all.min.css'
-import { motion } from 'framer-motion'
 import { useParams } from "next/navigation"
 import { useEffect } from "react"
 import { ToastContainer, toast } from 'react-toastify'
@@ -43,38 +42,34 @@ export default function BookPage() {
    if(!selectedBook.length) return <p>Book not found</p>
 
   return (
-    <motion.div transition={{ type: 'spring', damping: 40, mass: 0.75 }}
-    initial={{ opacity: 0, x: 1000 }} animate={{ opacity: 1, x: 0 }}>
-     <motion.section transition={{ type: 'spring', damping: 44, mass: 0.75 }}
-            initial={{ opacity: 0, y: -1000 }} animate={{ opacity: 1, y: 0 }} className={styles.appBar}>
+    <div>
+   
      <div className={styles.leftIcons} >
-    <i style={{fontSize:'20px',cursor:'pointer'}} className="fas fa-chevron-left"></i> 
-    </div>
-  <div className={styles.title}>  <h2 className={styles.titleStyles}> {selectedBook[0].title}</h2></div>
-  <div className={styles.icons}>
-    <button className={styles.saveButton} onClick={handleSave} >Save</button>
-    <i style={iconStyle} className="fas fa-cog"></i> 
-    <i style={iconStyle} className="fas fa-share"></i> 
-    <i style={iconStyle} className="fas fa-search"></i> 
-  </div>
-  </motion.section>
+        <i style={{fontSize:'20px',cursor:'pointer'}} className="fas fa-chevron-left"></i> 
+        </div>
+      <div className={styles.title}>  <h2 className={styles.titleStyles}> {selectedBook[0].title}</h2></div>
+      <div className={styles.icons}>
+        <button className={styles.saveButton} onClick={handleSave} >Save</button>
+        <i style={iconStyle} className="fas fa-cog"></i> 
+        <i style={iconStyle} className="fas fa-share"></i> 
+        <i style={iconStyle} className="fas fa-search"></i> 
+      </div>
 
-  <Editor
+      <Editor
         /** htmlContent accepts only one element. Just wrap everything on one element **/
         htmlContent={`
-        <main className="bookContainer">
-    <aside>
-    <h1 className="center">${selectedBook[0].title} </h1>
-    <span className="center small"> By ${selectedBook[0].author} </span>
-    ${selectedBook[0].content}
-    </aside>
-        </main>
-        `
-              }
-      />
+          <main className="bookContainer">
+          <aside>
+          <h1 className="center">${selectedBook[0].title} </h1>
+          <span className="center small"> By ${selectedBook[0].author} </span>
+          ${selectedBook[0].content}
+          </aside>
+              </main>
+              `
+                    }
+            />
        <ToastContainer />
-
-  </motion.div>
+    </div>
   )
 }
 
