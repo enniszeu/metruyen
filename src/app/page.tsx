@@ -8,13 +8,10 @@ export default async function Home() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stories`, { cache: 'no-store' }) 
   const books = await res.json()
 
-  function removeVietnameseTones(str) {
+  function removeVietnameseTones(str: string): string {
     return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
       .replace(/đ/g, 'd').replace(/Đ/g, 'D') 
-      .toLowerCase() 
-      .replace(/\s+/g, '-')
-      .replace(/[^a-z0-9-]/g, '')
-      .replace(/-+/g, '-'); 
+      .toLowerCase();
   }
   
   return (
