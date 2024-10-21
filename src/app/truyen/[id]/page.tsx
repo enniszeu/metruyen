@@ -1,4 +1,3 @@
-
 interface Chapter {
   _id: string; 
   title: string;
@@ -8,6 +7,7 @@ interface Chapter {
 
 interface ServerData {
   chapter_name: string;
+  chapter_api_data: string; // Define chapter_api_data here
 }
 
 interface Story {
@@ -28,6 +28,7 @@ interface Book {
     };
   };
 }
+
 
 export default async function TruyenPage({ params }: { params: { id: string } }) {
 
