@@ -6,9 +6,8 @@ interface ChapterData {
 }
 
 interface ApiResponse {
-  chapter: ChapterData;
+  [key: string]: ChapterData;
 }
-
 export const metadata = {
   title: 'Chi tiết chương',
   description: 'Hiển thị chi tiết chương của truyện',
@@ -19,35 +18,30 @@ import styles from './book.module.css';
 export default async function ChapPage({ params }: { params: { id: string; chapId: string } }) {
   const { id, chapId } = params;
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chapter?url=${process.env.NEXT_PUBLIC_API_URL_IO}/${id}/${chapId}/`, { cache: 'no-store' });
-
+  const res = await fetch(`https://sv1.otruyencdn.com/v1/api/chapter/${chapId}/`, { cache: 'no-store' });
   if (!res.ok) {
     return <div>Không thể tải dữ liệu.</div>; 
   }
 
-  const data: ApiResponse = await res.json(); // Đọc dữ liệu JSON và gán kiểu
-
-  // Kiểm tra xem dữ liệu có tồn tại hay không
-  const chapterContent = data?.chapter?.content || "Nội dung không có sẵn"; // Sử dụng || để đảm bảo có thông báo khi không có nội dung
+  const { data }: ApiResponse = await res.json();
+  console.log(data.item.chapter_image);
 
   return (
     <div>
       <div>
-        <h2>Chương {chapId}</h2>
       </div>
 
       {/* Render nội dung chương */}
-      <div
-        style={{
-          background: '#f8eadd',
-          borderRadius: '20px',
-          boxShadow: '0 0 10px rgba(0, 0, 0, .1)',
-          padding: '20px 30px',
-          flexGrow: 1,
-          margin: '20px 10px',
-        }}
-        dangerouslySetInnerHTML={{ __html: chapterContent }}
-      />
+      {
+        data.item.chapter_image.map((image: string, index: number) => (
+          <img
+            key={index}
+            src={`https://sv1.otruyencdn.com/${data.item.chapter_path}/${image.image_file}`}
+            alt={`Chuong ${index + 1}`}
+            className={styles.chapterImage}
+          />
+        ))
+      }
     </div>
   );
 }

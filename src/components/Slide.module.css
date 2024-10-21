@@ -10,12 +10,15 @@
     color: aliceblue;
 }   
 .bookImage{
-
+    height: 350px;
 }
 
 @media screen and (max-width: 768px) {
     .bookInfo h3{
         font-size: 8px;
+    }
+    .bookImage{
+        height: 135px;
     }
 
     .bookInfo p{

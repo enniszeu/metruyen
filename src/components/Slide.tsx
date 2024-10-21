@@ -1,24 +1,23 @@
-'use client'
+'use client';
 import { FC, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-
 import styles from './Slide.module.css';
 import images from '../constants/mockData';
-
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import Link from 'next/link';
 
 interface Book {
-    title: string;
+    name: string;
     author: string;
     type: string;
     chapter: string;
-    coverUrl: string;
+    slug: string;
+    thumb_url: string;
+    _id: string; // Kiểu của _id là string
 }
 
-// Define the props for the BookList component
 interface BookListProps {
     books: Book[];
     title?: string;
@@ -30,11 +29,11 @@ const Slide: FC<BookListProps> = ({ books, title }) => {
     // Hàm loại bỏ dấu tiếng Việt
     function removeVietnameseTones(str: string) {
         return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-            .replace(/đ/g, 'd').replace(/Đ/g, 'D') 
-            .toLowerCase() 
+            .replace(/đ/g, 'd').replace(/Đ/g, 'D')
+            .toLowerCase()
             .replace(/\s+/g, '-')
             .replace(/[^a-z0-9-]/g, '')
-            .replace(/-+/g, '-'); 
+            .replace(/-+/g, '-');
     }
 
     // Sử dụng useEffect để tạo ra mảng ảnh ngẫu nhiên
@@ -52,21 +51,20 @@ const Slide: FC<BookListProps> = ({ books, title }) => {
                 className="w-full"
             >
                 {books.map((book, index) => (
-                    <SwiperSlide key={index} className="flex justify-center">
-                        <a href={`/truyen/${removeVietnameseTones(book.title)}`} style={{ textDecoration: 'none' }}>
+                    <SwiperSlide key={book._id} className="flex justify-center"> {/* Sử dụng book._id làm key */}
+                        <Link href={`/truyen/${book.slug}`}>
                             <div className="relative p-4 bg-white rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition duration-300 ease-in-out max-w-xs">
                                 <img
-                                    src={book.coverUrl || randomImages[index]} // Sử dụng ảnh ngẫu nhiên đã được tạo trên client
-                                    alt={book.title}
+                                    src={`https://img.otruyenapi.com/uploads/comics/${book.thumb_url}`}
+                                    alt={book.name}
                                     className={styles.bookImage}
                                 />
-                                {/* Overlay cho tiêu đề và tác giả */}
                                 <div className={`${styles.bookInfo} bg-black bg-opacity-50 text-white p-3 rounded-b-lg`}>
-                                    <h3 className="text-lg font-bold">{book.title}</h3>
+                                    <h3 className="text-lg font-bold">{book.name}</h3>
                                     <p className="text-sm">{book.author}</p>
                                 </div>
                             </div>
-                        </a>
+                        </Link>
                     </SwiperSlide>
                 ))}
             </Swiper>

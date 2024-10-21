@@ -20,9 +20,14 @@ interface Book {
 // Đây là một Server Component
 export default async function Home() {
   // Gọi API trực tiếp trong Server Component
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stories`, { cache: 'no-store' }) 
+  const resNew = await fetch(`https://otruyenapi.com/v1/api/danh-sach/truyen-moi`, { cache: 'no-store' }) 
+  const resOnNew = await fetch(`https://otruyenapi.com/v1/api/danh-sach/sap-ra-mat`, { cache: 'no-store' }) 
+  const resFull = await fetch(`https://otruyenapi.com/v1/api/danh-sach/hoan-thanh`, { cache: 'no-store' }) 
 
-  const books = await res.json()
+  const books = await resNew.json()
+  const booksFukk = await resFull.json()
+  const booksOnNew = await resOnNew.json()
+  console.log(books.data.items)
 
   function removeVietnameseTones(str: string) {
     return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
@@ -40,9 +45,12 @@ export default async function Home() {
       <main className={styles.main}>
         <div>
           <div>
-              <Slide books={books.stories} title='Truyện đề cử'/>
+          <Slide books={books.data.items} title='Truyện new'/>
+          <Slide books={booksOnNew.data.items} title='Truyện Sắp ra mắt'/>
+          <Slide books={booksFukk.data.items} title='Truyện Full'/>
+              {/* <Slide books={books.stories} title='Truyện đề cử'/>
               <Slide books={books.stories} title='Truyện new'/>
-              <Slide books={books.stories} title='Truyện hot'/>
+              <Slide books={books.stories} title='Truyện hot'/> */}
           </div>
         </div>
       </main>
